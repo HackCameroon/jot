@@ -8,7 +8,7 @@ function isGraphable(s){
 }
 
 function getGraphableParts(s){
-    
+    // to be implemented 
 }
 
 getGraphable("x=7");
