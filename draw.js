@@ -1,20 +1,26 @@
 // initialize SVG.js
 var draw = SVG('drawing');
+let mouseDown = false;
+let path;  
 
-// event handler function
+
+// RENAME THIS FUNCTION -dc
 function handler(e) {
-    e = e || window.event;
-
-    var pageX = e.pageX;
-    var pageY = e.pageY;
-
-    console.log(pageX, pageY);
-
-    draw.path()
+    //alert(mouseDown);
+    if(mouseDown){
+        // e = e || window.event;
+        
+        path.plot(path.array().toString().concat(e.pageX.toString(),' ',e.pageY.toString()));
+        console.log(e.pageX, e.pageY);
+    }
 }
-
-// attach handler to the click event of the document
+document.onmousedown = function(e) { 
+    mouseDown = true;
+    path = draw.path('M'.concat(e.pageX.toString(),' ',e.pageY.toString()));
+    path.fill('none');
+    path.stroke({ color: '#f06', width: 4, linecap: 'round', linejoin: 'round' });
+}
+document.onmouseup = function() {
+    mouseDown = false;
+}
 document.addEventListener('mousemove', handler);
-
-// draw pink square
-draw.rect(100, 100).move(100, 50).fill('#f06');
