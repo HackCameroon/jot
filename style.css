@@ -1,0 +1,40 @@
+* {
+  font-family: "Nunito", sans-serif;
+}
+
+.toolbar {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 2em;
+  width: 100vw;
+  height: 10vh;
+  min-height: 40px;
+  color: #B37D32;
+  padding: 10px;
+  overflow: none;
+}
+
+.toolbar button {
+  background: none;
+  border: none;
+  color: #B37D32;
+  font-size: 1em;
+}
+
+.textArea {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 50px;
+  width: 100vw;
+  height: 90vh;
+  border: none;
+  font-size: 16pt;
+  background: #FFEFD9;
+}
+
+body {
+  background: #FFEFD9;
+  padding: 0;
+  margin: 0;
+}
+/*# sourceMappingURL=style.css.map */
