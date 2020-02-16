@@ -42,7 +42,7 @@
   z-index: 3;
 }
 
-.textArea {
+#textArea {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 50px;
@@ -55,23 +55,23 @@
   z-index: 1;
 }
 
-.textArea .bold {
+#textArea .bold {
   font-weight: bold;
 }
 
-.textArea .underline {
+#textArea .underline {
   text-decoration: underline;
 }
 
-.textArea .italic {
+#textArea .italic {
   font-style: italic;
 }
 
-.textArea .strikethrough {
+#textArea .strikethrough {
   text-decoration: line-through;
 }
 
-.textArea .highlight {
+#textArea .highlight {
   background: #61C2FF;
 }
 
