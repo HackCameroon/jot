@@ -1,11 +1,3 @@
-let spanHighlighter = rangy.createHighlighter();
-let divHighlighter = rangy.createHighlighter();
-let spanApplier = rangy.createClassApplier('span');
-let divApplier = rangy.createClassApplier('div');
-
-spanHighlighter.addClassApplier(spanApplier);
-divHighlighter.addClassApplier(divHighlighter);
-
 function isGraphable(s){
     let calculator = Desmos.GraphingCalculator();
     calculator.setExpression({ id: 'graph1', latex: s});
@@ -23,83 +15,75 @@ getGraphable("x=7");
 
 
 
-let doc = {
+doc = {
     typing: true,
     selection,
-    $textArea: $('#textArea'),
-    toggle: (className)=>{
-
-    },
-    makeItalic: ()=>{
-        spanHighlighter.highlight('italic');
-    },
-
-    makeBold: ()=>{
-        spanHighlighter.highlight('bold');
-    },
-
-    highlight: ()=>{
-        spanHighlighter.highlight('highlight');
-    },
-    makeStrikethrough: ()=>{
-        spanHighlighter.highlight('strikethrough');
-    },
-    addCheckBox: ()=>{
-        rangey.createRange().insertNode('<input type="checkbox">');
-    },
-    addUrl: (url)=>{
-        spanHighlighter.highlight('bold');
+    getSelectionText: function () {
+        let text = "";
+        let activeEl = document.activeElement;
+        let activeElTagName = activeEl ? activeEl.tagName.toLowerCase() : null;
+        if (activeElTagName == "textarea") {
+            text = activeEl.value.slice(activeEl.selectionStart, activeEl.selectionEnd);
+        }
+        return text;
     }
 }
-
-/**doc.$textArea.on('mouseup', 'keyup', function(e) {
+$textArea = $('#textArea');
+$textArea.on('mouseup', 'keyup', function(e) {
     if(typingMode){
-        doc.selection  = rangey.
+        doc.selection  = getSelectionText();
     }
-});**/
+});
 
-doc.$textArea.on('input', ()=>{
-    let currText = $textArea.value;
-    let prevText = currText.slice(0, cursorPos);
-    const cursorPos = $textArea.selectionStart;
-    
+$textArea.on('input', ()=>{
+    let prevText = text = $textArea.value.slice(0, $textArea.selectionStart);
 
     const patterns = [
-        [/(^|[\r\n])(-|*)( |\t)$/, ()=>{
-            doc.makeBullet(PLAIN);
+        [/(-|*)( |\t)$/, ()=>{
+            
         }],
-        [/`(la)?tex$/, doc.makeTex],
-        [/'img$/, doc.insertImg],
-        [/(^|[\r\n])1(\)|.)$/, ()=>{
-            doc.makeBullet(NUM);
+        [/`(la)?tex$/, ()=>{
+            
         }],
-        [/(^|[\r\n])i(\)|.)$/i, ()=>{
-            doc.makeBullet(ROMAN);
+        [/'img$/, ()=>{
+            
         }],
-        [/(^|[\r\n])a(\)|.)$/i, ()=>{
-            doc.makeBullet(LETTER);
+        [/1(\)|.)$/, ()=>{
+            
         }],
-        [/'(b|(bold)|(strong))$/i, doc.makeBold],
-        [/'(i|(em)|(italics?))$/i, doc.makeItalic],
-        [/'(u(nderline)?)$/i, doc.underline],
-        [/'c(ode)?$/i, doc.addCode],
-        [/'table$/i, doc.addTable],
-        [/'check(box)?$/, doc.addCheckBox],
-        [/'h(ighlight)?$/, doc.addUrl],
-        [/'url$/, doc.addUrl],
+        [/1(\)|.)$/, ()=>{
+            
+        }],
+        [/'(b|bold|strong)$/, ()=>{
+            
+        }],
+        [/'(i|em|italics?)$/, ()=>{
+            
+        }],
+        [/'(u|underline)$/, ()=>{
+            
+        }],
+        [/'code$/, ()=>{
+            
+        }],
+        [/'table$/, ()=>{
+            
+        }],
+        [/'check(box)?$/, ()=>{
+            
+        }],
+        [/'url$/, ()=>{
+            
+        }],
         [/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, (url)=>{
-            doc.addUrl(url);
+            
         }]
     ];
     for(pattern of patterns){
-        const matches = prevText.exec(pattern[0]);
-        if(matches){
-            const match = matches[0];
+        const mathch = prevText.match(pattern[0]);
+        if(match){
             pattern[1](match);
-            currText = currText.slice;
-            $textArea.value = prevtext.slice(0, match.firstIndex) + currText.slice(cursorPos);
         }
-
     }
 });
 
@@ -125,19 +109,9 @@ document.addEventListener('keydown', (event) => {
     // event.ctrlKey true if Ctrl key is pressed at the same time.
     console.log(`Combination of ctrlKey + ${keyName}`);
   } else if (event.altKey){
-    console.log(`Combination of altKey + ${keyName}`);
+    console.log(`Cosmbination of altKey + ${keyName}`);
   } else {
     console.log(`Key pressed ${keyName}`);
-  }
-});
-
-document.addEventListener('keyup', (event) => {
-  const keyName = event.key;
-
-  // As the user releases the Ctrl key,
-  // so event.ctrlKey is false.
-  if (keyName === 'Control') {
-    console.log('Control key was released');
   }
 });
 

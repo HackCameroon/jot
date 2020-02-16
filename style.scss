@@ -26,6 +26,9 @@ $mainFont: 'Nunito', sans-serif;
         color: $brown;
         font-size: 1em;;
     }
+    #colorPicker{
+        display: none;
+    }
 }
 
 #drawing{

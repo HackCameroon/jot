@@ -5,8 +5,8 @@ let mouseDown = false;
 let drawBtnToggle = false;
 let eraseBtnToggle = false;
 
-const DRAW_COLOR = '#f06';
-const DRAW_WIDTH = 4;
+let drawColor = '#f06';
+const drawWidth = 4;
 
 
 function drawHandler(e) {
@@ -23,7 +23,7 @@ $('#drawBtn').click(function () {
             mouseDown = true;
             p = draw.path('M'.concat(e.pageX.toString(), ' ', e.pageY.toString()));
             p.fill('none');
-            p.stroke({ color: DRAW_COLOR, width: DRAW_WIDTH, linecap: 'round', linejoin: 'round' });
+            p.stroke({ color: drawColor, width: drawWidth, linecap: 'round', linejoin: 'round' });
         }
 
         document.onmouseup = function () {
@@ -77,3 +77,8 @@ $('#eraseBtn').click(function () {
 // $drawing.filter('path, circle, rect').mouseover((e) => {
 //     alert("testing")
 // });
+
+$("#colorPicker").change(()=>{
+    drawColor = $("#colorPicker").val();
+    $("#colorBtn").css('color', drawColor);
+});
