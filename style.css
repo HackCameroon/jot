@@ -21,6 +21,13 @@
   font-size: 1em;
 }
 
+#drawing {
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  top: 10vh;
+}
+
 .textArea {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -30,6 +37,26 @@
   border: none;
   font-size: 16pt;
   background: #FFEFD9;
+}
+
+.textArea .bold {
+  font-weight: bold;
+}
+
+.textArea .underline {
+  text-decoration: underline;
+}
+
+.textArea .italic {
+  font-style: italic;
+}
+
+.textArea .strikethrough {
+  text-decoration: line-through;
+}
+
+.textArea .highlight {
+  background: #61C2FF;
 }
 
 body {
