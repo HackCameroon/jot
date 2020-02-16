@@ -41,6 +41,11 @@ $mainFont: 'Nunito', sans-serif;
     }
 }
 
+.front{
+    position: relative;
+    z-index: 3;
+}
+
 .textArea{
     box-sizing: border-box;
     padding: 50px;

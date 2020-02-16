@@ -18,6 +18,8 @@ const X_OFFSET = 0;
 const Y_OFFSET = -50;
 
 
+$drawing = $("#drawing");   // create jquery object for drawings
+
 
 // continues a path to the current position of mouse
 function drawHandler(e) {
@@ -34,10 +36,12 @@ $('#drawBtn').click(function () {
     // switches the from drawing mode to text mode when button is pressed
     if (currentCursor === cursorMode.DRAW) {
         currentCursor = cursorMode.TEXT;
-        $('#drawing_mode').hide();
+        $("#drawingMode").hide();
+        $drawing.removeClass("front");
     }
     // switches from any mode to draw when button is pressed
     else {
+        $drawing.addClass("front");
         currentCursor = cursorMode.DRAW;
     }
 
@@ -68,9 +72,6 @@ $('#drawBtn').click(function () {
     }
 });
 
-
-
-$drawing = $("#drawing");   // create jquery object for drawings
 
 $('#eraseBtn').click(function () {
     
