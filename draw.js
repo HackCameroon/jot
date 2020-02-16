@@ -12,8 +12,8 @@ let currentCursor = cursorMode.TEXT;
 let drawBtnToggle = false;
 let eraseBtnToggle = false;
 
-let DRAW_COLOR = '#f06';
-let DRAW_WIDTH = 4;
+let drawColor = '#f06';
+let drawWidth = 4;
 const X_OFFSET = 0;
 const Y_OFFSET = -50;
 
@@ -56,7 +56,7 @@ $('#drawBtn').click(function () {
 
             p = draw.path('M'.concat((e.pageX+X_OFFSET).toString(), ' ', (e.pageY+Y_OFFSET).toString()));     // start a path
             p.fill('none');
-            p.stroke({ color: DRAW_COLOR, width: DRAW_WIDTH, linecap: 'round', linejoin: 'round' });
+            p.stroke({ color: drawColor, width: drawWidth, linecap: 'round', linejoin: 'round' });
         }
         // when the mouse button is released
         document.onmouseup = function () {
@@ -116,4 +116,15 @@ $('#eraseBtn').click(function () {
     else {
         $drawing.find('path, circle, rect').removeEventListener('mouseenter');
     }
+
+});
+
+
+// $drawing.filter('path, circle, rect').mouseover((e) => {
+//     alert("testing")
+// });
+
+$("#colorPicker").change(()=>{
+    drawColor = $("#colorPicker").val();
+    $("#colorBtn").css('color', drawColor);
 });
