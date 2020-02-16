@@ -30,37 +30,114 @@ function isGraphable(s){
 function getGraphableParts(s){
     // to be implemented 
 }
-console.log(isGraphable("x"));
+
+//getGraphable("x=7");
 
 
 
-// let doc = {
-//     typing: true,
-//     selection,
-//     $textArea: $('#textArea'),
-//     toggle: (className)=>{
+let doc = {
+    typing: true,
+    selection: null,
+    $textArea: $('#textArea'),
+    bulletTypes: {
+        BULLET: 0,
+        ROMAN: 1,
+        LETTER: 2,
+        NUM: 3
+    },
+    toggle: (className)=>{
 
-//     },
-//     makeItalic: ()=>{
-//         spanHighlighter.highlight('italic');
-//     },
+    },
+    makeItalic: ()=>{
+        spanHighlighter.highlight('italic');
+    },
 
-//     makeBold: ()=>{
-//         spanHighlighter.highlight('bold');
-//     },
+    makeBold: ()=>{
+        spanHighlighter.highlight('bold');
+    },
 
-//     highlight: ()=>{
-//         spanHighlighter.highlight('highlight');
-//     },
-//     makeStrikethrough: ()=>{
-//         spanHighlighter.highlight('strikethrough');
-//     },
-//     addCheckBox: ()=>{
-//         rangey.createRange().insertNode('<input type="checkbox">');
-//     },
-//     addUrl: (url)=>{
-//         spanHighlighter.highlight('bold');
-//     }
+    highlight: ()=>{
+        spanHighlighter.highlight('highlight');
+    },
+    makeStrikethrough: ()=>{
+        spanHighlighter.highlight('strikethrough');
+    },
+    addCheckBox: ()=>{
+        rangey.createRange().insertNode('<input type="checkbox">');
+    },
+    addUrl: (url)=>{
+        spanHighlighter.highlight('bold');
+    }
+}
+
+/**doc.$textArea.on('mouseup', 'keyup', function(e) {
+    if(typingMode){
+        doc.selection  = rangey.
+    }
+});**/
+
+doc.$textArea.on('input', ()=>{
+    const cursorPos = doc.$textArea.selectionStart;
+    let currText = doc.$textArea.val();
+    let prevText = currText.slice(0, cursorPos);
+    
+    console.log(cursorPos);
+    console.log(currText);
+    console.log(prevText);
+
+
+    const patterns = [
+        [/(^|[\r\n])(-|\*)( |\t)$/i, ()=>{
+            doc.makeBullet(doc.bulletTypes.PLAIN);
+        }],
+        [/`(la)?tex$/, doc.makeTex],
+        [/'img$/, doc.insertImg],
+        [/(^|[\r\n])1(\)|.)$/i, ()=>{
+            doc.makeBullet(doc.bulletTypes.NUM);
+        }],
+        [/(^|[\r\n])i(\)|.)$/i, ()=>{
+            doc.makeBullet(doc.bulletTypes.ROMAN);
+        }],
+        [/(^|[\r\n])a(\)|.)$/i, ()=>{
+            doc.makeBullet(doc.bulletTypes.LETTER);
+        }],
+        [/'(b|(bold)|(strong))$/i, doc.makeBold],
+        [/'(i|(em)|(italics?))$/i, doc.makeItalic],
+        [/'(u(nderline)?)$/i, doc.underline],
+        [/'c(ode)?$/i, doc.addCode],
+        [/'table$/i, doc.addTable],
+        [/'check(box)?$/i, doc.addCheckBox],
+        [/'h(ighlight)?$/i, doc.addUrl],
+        [/'url$/i, doc.addUrl],
+        [/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, (url)=>{
+            doc.addUrl(url);
+        }]
+    ];
+    for(pattern of patterns){
+        const matches = pattern[0].exec(prevText);
+        console.log(prevText);
+        console.log(matches);
+        if(matches){
+            console.log('matched');
+            const match = matches[0];
+            pattern[1](match);
+            currText = currText.slice;
+            doc.$textArea.value = prevtext.slice(0, match.firstIndex) + currText.slice(cursorPos);
+            return;
+        }
+    }
+});
+
+// const keywords =    ["e", "pi", 
+//                     "+", "-", "*", "/", "^",
+//                     "sin", "cos", "tan", "cot", "sec", "csc",
+//                     "arcsin", "arccos", "arctan", "arccot", "arcsec", "arccsc",
+//                     "ln", "log", "sqrt",
+//                     "x", "y"
+//                     ];
+
+// function getLatexParts(s){
+//     s.includes("=")
 // }
 
 // /**doc.$textArea.on('mouseup', 'keyup', function(e) {
