@@ -38,13 +38,11 @@ $('#drawBtn').click(function () {
         currentCursor = cursorMode.TEXT;
         $("#drawingMode").hide();
         $("#textMode").show();
-        $drawing.removeClass("front");
     }
     // switches from any mode to draw when button is pressed
     else {
         $("#drawingMode").show();
         $("#textMode").hide();
-        $drawing.addClass("front");
         currentCursor = cursorMode.DRAW;
     }
 

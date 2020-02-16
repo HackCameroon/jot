@@ -21,21 +21,15 @@
   font-size: 1em;
 }
 
+.toolbar #colorPicker {
+  display: none;
+}
+
 #drawing {
   width: 100vw;
   height: 100%;
   position: absolute;
   top: 10vh;
-}
-
-#drawing .path {
-  position: relative;
-  z-index: 1;
-}
-
-.front {
-  position: relative;
-  z-index: 3;
 }
 
 .textArea {
@@ -44,11 +38,10 @@
   padding: 50px;
   width: 100vw;
   height: 90vh;
+  background: none;
   border: none;
   font-size: 16pt;
-  background: #FFEFD9;
   position: relative;
-  z-index: 1;
 }
 
 .textArea .bold {
