@@ -10,19 +10,21 @@ divHighlighter.addClassApplier(divHighlighter);
 let graphCount = 0;
 function isGraphable(s){
     let calculator = Desmos.GraphingCalculator();
-    calculator.setExpression({id:'graph1', latex: s});
+    calculator.setExpression({id:'g1', latex: s});
     calculator.observe('expressionAnalysis', function() {
-        let analysis = calculator.expressionAnalysis["graph1"];
+        let analysis = calculator.expressionAnalysis["g1"];
         if(analysis.isGraphable){
-            let graphDiv = $('<div id="graph'+ graphCount +'"></div>');
+            let graphDiv = $('<div id="graph'+ graphCount +'" contenteditable="false"></div>')
+            .css({'width': 500, 'float': 'right'});
             doc.$textArea.append(graphDiv);
-            graphCount++;
-
+            
+            
             let elt = $('#graph' + graphCount);
-            calculator = Desmos.GraphingCalculator(elt);
-            calculator.setExpression({id:'graph2', latex: s});
+            graphCount++;
+            calculator = Desmos.GraphingCalculator(elt[0], {'keypad':false, 'expressionsCollapsed':true, 'zoomButtons':false, 'settingsMenu':false});
+            calculator.setExpression({id:'g2', latex: s});
 
-            graphDiv.children().css('background', '#FFEFD9');
+            graphDiv.find('.dcg-container').css('background', '#FFEFD9');
         }
     });
 }
@@ -31,7 +33,7 @@ function getGraphableParts(s){
     // to be implemented 
 }
 
-//getGraphable("x=7");
+isGraphable("y=-1/2x^2+6");
 
 
 
