@@ -19,12 +19,13 @@ function drawHandler(e) {
 $('#drawBtn').click(function () {
     drawBtnToggle = !drawBtnToggle;
     if (drawBtnToggle) {
-        document.onmousedown = function (e) {
+        $(document).mousedown(function (e) {
             mouseDown = true;
             p = draw.path('M'.concat(e.pageX.toString(), ' ', e.pageY.toString()));
             p.fill('none');
             p.stroke({ color: DRAW_COLOR, width: DRAW_WIDTH, linecap: 'round', linejoin: 'round' });
-        }
+            $(p.node).addClass('path');
+        });
 
         document.onmouseup = function () {
             mouseDown = false;
