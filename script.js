@@ -21,14 +21,20 @@ function getGraphableParts(s){
     // to be implemented 
 }
 
-getGraphable("x=7");
+//getGraphable("x=7");
 
 
 
 let doc = {
     typing: true,
-    selection,
+    selection: null,
     $textArea: $('#textArea'),
+    bulletTypes: {
+        BULLET: 0,
+        ROMAN: 1,
+        LETTER: 2,
+        NUM: 3
+    },
     toggle: (className)=>{
 
     },
@@ -61,47 +67,52 @@ let doc = {
 });**/
 
 doc.$textArea.on('input', ()=>{
-    console.log('hi');
-    let currText = $textArea.val();
+    const cursorPos = doc.$textArea.selectionStart;
+    let currText = doc.$textArea.val();
     let prevText = currText.slice(0, cursorPos);
-    const cursorPos = $textArea.selectionStart;
     
+    console.log(cursorPos);
+    console.log(currText);
+    console.log(prevText);
+
 
     const patterns = [
-        [/(^|[\r\n])(-|*)( |\t)$/, ()=>{
-            doc.makeBullet(PLAIN);
+        [/(^|[\r\n])(-|\*)( |\t)$/i, ()=>{
+            doc.makeBullet(doc.bulletTypes.PLAIN);
         }],
         [/`(la)?tex$/, doc.makeTex],
         [/'img$/, doc.insertImg],
-        [/(^|[\r\n])1(\)|.)$/, ()=>{
-            doc.makeBullet(NUM);
+        [/(^|[\r\n])1(\)|.)$/i, ()=>{
+            doc.makeBullet(doc.bulletTypes.NUM);
         }],
         [/(^|[\r\n])i(\)|.)$/i, ()=>{
-            doc.makeBullet(ROMAN);
+            doc.makeBullet(doc.bulletTypes.ROMAN);
         }],
         [/(^|[\r\n])a(\)|.)$/i, ()=>{
-            doc.makeBullet(LETTER);
+            doc.makeBullet(doc.bulletTypes.LETTER);
         }],
         [/'(b|(bold)|(strong))$/i, doc.makeBold],
         [/'(i|(em)|(italics?))$/i, doc.makeItalic],
         [/'(u(nderline)?)$/i, doc.underline],
         [/'c(ode)?$/i, doc.addCode],
         [/'table$/i, doc.addTable],
-        [/'check(box)?$/, doc.addCheckBox],
-        [/'h(ighlight)?$/, doc.addUrl],
-        [/'url$/, doc.addUrl],
+        [/'check(box)?$/i, doc.addCheckBox],
+        [/'h(ighlight)?$/i, doc.addUrl],
+        [/'url$/i, doc.addUrl],
         [/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, (url)=>{
             doc.addUrl(url);
         }]
     ];
     for(pattern of patterns){
-        const matches = prevText.exec(pattern[0]);
+        const matches = pattern[0].exec(prevText);
+        console.log(prevText);
         console.log(matches);
         if(matches){
+            console.log('matched');
             const match = matches[0];
             pattern[1](match);
             currText = currText.slice;
-            $textArea.value = prevtext.slice(0, match.firstIndex) + currText.slice(cursorPos);
+            doc.$textArea.value = prevtext.slice(0, match.firstIndex) + currText.slice(cursorPos);
             return;
         }
     }
