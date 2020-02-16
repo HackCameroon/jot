@@ -28,6 +28,13 @@ $mainFont: 'Nunito', sans-serif;
     }
 }
 
+#drawing{
+    width: 100vw;
+    height: 100%;
+    position: absolute;
+    top: 10vh;
+}
+
 .textArea{
     box-sizing: border-box;
     padding: 50px;
@@ -36,6 +43,27 @@ $mainFont: 'Nunito', sans-serif;
     border: none;
     font-size: 16pt;
     background: $paper;
+
+    .bold{
+        font-weight: bold;
+    }
+
+    .underline{
+        text-decoration: underline;
+    }
+
+    .italic{
+        font-style: italic;
+    }
+
+    .strikethrough{
+        text-decoration: line-through;
+    }
+    
+    .highlight{
+        background: $lightblue;
+    }
+        
 }
 
 body {
