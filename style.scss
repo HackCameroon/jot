@@ -33,7 +33,6 @@ $mainFont: 'Nunito', sans-serif;
     height: 100%;
     position: absolute;
     top: 10vh;
-    z-index: -1;
 
     .path {
         position: relative;
@@ -54,6 +53,8 @@ $mainFont: 'Nunito', sans-serif;
     border: none;
     font-size: 16pt;
     background: $paper;
+    position: relative;
+    z-index: 1;
 
     .bold{
         font-weight: bold;
