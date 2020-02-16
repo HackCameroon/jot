@@ -1,0 +1,45 @@
+$brown: #B37D32;
+$paper: #FFEFD9;
+$tan: #FFBD61;
+$darkBlue: #207AB3;
+$lightblue: #61C2FF;
+
+$titleFont:'Josefin Slab', serif;
+$mainFont: 'Nunito', sans-serif;
+
+*{
+    font-family: $mainFont;
+}
+
+.toolbar{
+    box-sizing: border-box;
+    font-size: 2em;;
+    width: 100vw;
+    height: 10vh;
+    min-height: 40px;
+    color: $brown;
+    padding: 10px;
+    overflow: none;
+    button{
+        background: none;
+        border: none;
+        color: $brown;
+        font-size: 1em;;
+    }
+}
+
+.textArea{
+    box-sizing: border-box;
+    padding: 50px;
+    width: 100vw;
+    height: 90vh;
+    border: none;
+    font-size: 16pt;
+    background: $paper;
+}
+
+body {
+    background: $paper;
+    padding: 0;
+    margin: 0;
+}
