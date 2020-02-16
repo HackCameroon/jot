@@ -1,2 +1,79 @@
-var draw = SVG('drawing').size(300, 300)
-var rect = draw.rect(100, 100).attr({ fill: '#f06' })
+// initialize SVG.js
+let draw = SVG('drawing');
+let p;
+let mouseDown = false;
+let drawBtnToggle = false;
+let eraseBtnToggle = false;
+
+const DRAW_COLOR = '#f06';
+const DRAW_WIDTH = 4;
+
+
+function drawHandler(e) {
+    if (mouseDown) {
+        p.plot(p.array().toString().concat(e.pageX.toString(), ' ', e.pageY.toString()));
+        console.log(e.pageX, e.pageY);
+    }
+}
+
+$('#drawBtn').click(function () {
+    drawBtnToggle = !drawBtnToggle;
+    if (drawBtnToggle) {
+        document.onmousedown = function (e) {
+            mouseDown = true;
+            p = draw.path('M'.concat(e.pageX.toString(), ' ', e.pageY.toString()));
+            p.fill('none');
+            p.stroke({ color: DRAW_COLOR, width: DRAW_WIDTH, linecap: 'round', linejoin: 'round' });
+        }
+
+        document.onmouseup = function () {
+            mouseDown = false;
+        }
+
+        document.addEventListener('mousemove', drawHandler);
+    }
+    else {
+        document.removeEventListener('mousemove', drawHandler);
+        document.onmouseup = null;
+        document.onmousedown = null;
+    }
+});
+
+
+$drawing = $("#drawing");
+
+function eraseHandler() {
+    if (mouseDown) {
+        console.log("erase scan");
+        $(p.node).mouseover((e) => {
+            // alert("testing");
+        });
+    }
+}
+
+$('#eraseBtn').click(function () {
+    eraseBtnToggle = !eraseBtnToggle;
+    if (eraseBtnToggle) {
+        console.log("IM IN HERE");
+        document.onmousedown = function (e) {
+            console.log("DOWN");
+            mouseDown = true;
+        }
+        document.onmouseup = function () {
+            mouseDown = false;
+            console.log("UP");
+        }
+        document.addEventListener('mousemove', eraseHandler);
+    }
+    else {
+        document.removeEventListener('mousemove', drawHandler);
+        document.onmouseup = null;
+        document.onmousedown = null;
+    }
+
+});
+
+
+// $drawing.filter('path, circle, rect').mouseover((e) => {
+//     alert("testing")
+// });
