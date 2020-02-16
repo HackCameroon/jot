@@ -15,7 +15,7 @@ function isGraphable(s){
         let analysis = calculator.expressionAnalysis["g1"];
         if(analysis.isGraphable){
             let graphDiv = $('<div id="graph'+ graphCount +'" contenteditable="false"></div>')
-            .css({'width': 500, 'float': 'right'});
+            .addClass('graph');
             doc.$textArea.append(graphDiv);
             
             
@@ -122,59 +122,75 @@ function getCaretCharacterOffsetWithin(element) {
     }
     return -1;
   }
+function addHandler(){
+    $('#textArea, #textArea *').not('[contenteditable="false"]')
+    .off('input')
+    .on('input', (e)=>{
+        console.log(1000);
+        addHandler();
+        typeHandler(e);
+    });
+}
+addHandler();
 
-$('#textArea, #textArea [contenteditable="true"]').on('input', (e)=>{
-    const cursorPos = getCaretPosition();
-    let currText = e.target.innerText;
-    let prevText = currText.slice(0, cursorPos);
-    
-    console.log(cursorPos);
-    console.log(currText);
-    console.log(prevText);
+function typeHandler(e){
 
 
-    const patterns = [
-        [/(^|[\r\n])(-|\*)( |\t)$/i, ()=>{
-            doc.makeBullet(doc.bulletTypes.PLAIN);
-        }],
-        [/`(la)?tex$/, doc.makeTex],
-        [/'img$/, doc.insertImg],
-        [/(^|[\r\n])1(\)|.)$/i, ()=>{
-            doc.makeBullet(doc.bulletTypes.NUM);
-        }],
-        [/(^|[\r\n])i(\)|.)$/i, ()=>{
-            doc.makeBullet(doc.bulletTypes.ROMAN);
-        }],
-        [/(^|[\r\n])a(\)|.)$/i, ()=>{
-            doc.makeBullet(doc.bulletTypes.LETTER);
-        }],
-        [/'(b|(bold)|(strong))$/i, doc.makeBold],
-        [/'(i|(em)|(italics?))$/i, doc.makeItalic],
-        [/'(u(nderline)?)$/i, doc.underline],
-        [/'c(ode)?$/i, doc.addCode],
-        [/'table$/i, doc.addTable],
-        [/'check(box)?$/i, doc.addCheckBox],
-        [/'h(ighlight)?$/i, doc.addUrl],
-        [/'url$/i, doc.addUrl],
-        [/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, (url)=>{
-            doc.addUrl(url);
-        }]
-    ];
-    for(pattern of patterns){
-        const matches = pattern[0].exec(prevText);
+        console.log(e);
+        e.stopPropagation();
+        const cursorPos = getCaretCharacterOffsetWithin(e.target);
+        let currText = e.target.innerText;
+        console.log(e.target);
+        let prevText = currText.slice(0, cursorPos);
+        
+        console.log(cursorPos);
+        console.log(currText);
         console.log(prevText);
-        console.log(matches);
-        if(matches){
-
-            console.log('matched');
-            e.target.innerText = prevtext.slice(0, match.firstIndex) + currText.slice(cursorPos);
-            const match = matches[0];
-            pattern[1](match);
-            currText = currText.slice;
-            return;
+    
+    
+        const patterns = [
+            [/(^|[\r\n])(-|\*)( |\t)$/i, ()=>{
+                doc.makeBullet(doc.bulletTypes.PLAIN);
+            }],
+            [/`(la)?tex$/, doc.makeTex],
+            [/'img$/, doc.insertImg],
+            [/(^|[\r\n])1(\)|.)$/i, ()=>{
+                doc.makeBullet(doc.bulletTypes.NUM);
+            }],
+            [/(^|[\r\n])i(\)|.)$/i, ()=>{
+                doc.makeBullet(doc.bulletTypes.ROMAN);
+            }],
+            [/(^|[\r\n])a(\)|.)$/i, ()=>{
+                doc.makeBullet(doc.bulletTypes.LETTER);
+            }],
+            [/'(b|(bold)|(strong))$/i, doc.makeBold],
+            [/'(i|(em)|(italics?))$/i, doc.makeItalic],
+            [/'(u(nderline)?)$/i, doc.underline],
+            [/'c(ode)?$/i, doc.addCode],
+            [/'table$/i, doc.addTable],
+            [/'check(box)?$/i, doc.addCheckBox],
+            [/'h(ighlight)?$/i, doc.addUrl],
+            [/'url$/i, doc.addUrl],
+            [/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, (url)=>{
+                doc.addUrl(url);
+            }]
+        ];
+        for(pattern of patterns){
+            const matches = pattern[0].exec(prevText);
+            //console.log(prevText);
+            console.log(matches);
+            if(matches){
+                const match = matches[0];
+                console.log('matched');
+                e.target.innerText = prevText.slice(0, match.firstIndex) + currText.slice(cursorPos);
+                
+                pattern[1](match);
+                currText = currText.slice;
+                return;
+            }
         }
-    }
-});
+    
+}
 
 // const keywords =    ["e", "pi", 
 //                     "+", "-", "*", "/", "^",

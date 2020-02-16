@@ -6,7 +6,6 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-size: 2em;
-  width: 100vw;
   height: 10vh;
   min-height: 40px;
   color: #B37D32;
@@ -25,11 +24,23 @@
   display: none;
 }
 
+.graph {
+  width: 500px;
+  height: 400px;
+  float: right;
+}
+
+.dcg-graphpaper-branding {
+  display: none !important;
+}
+
 #drawing {
-  width: 100vw;
-  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   position: absolute;
   top: 10vh;
+  padding: 0;
+  height: 90vh;
 }
 
 #drawing .path {
@@ -46,8 +57,7 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 50px;
-  width: 100vw;
-  height: 90vh;
+  margin: 0;
   background: none;
   border: none;
   font-size: 16pt;

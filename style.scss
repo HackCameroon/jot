@@ -13,8 +13,7 @@ $mainFont: 'Nunito', sans-serif;
 
 .toolbar{
     box-sizing: border-box;
-    font-size: 2em;;
-    width: 100vw;
+    font-size: 2em;
     height: 10vh;
     min-height: 40px;
     color: $brown;
@@ -31,11 +30,22 @@ $mainFont: 'Nunito', sans-serif;
     }
 }
 
+.graph{
+    width: 500px;
+    height: 400px;
+    float: right;
+}
+
+.dcg-graphpaper-branding {
+    display: none !important;
+}
+
 #drawing{
-    width: 100vw;
-    height: 100%;
+    box-sizing: border-box;
     position: absolute;
     top: 10vh;
+    padding: 0;
+    height: 90vh;
 
     .path {
         position: relative;
@@ -51,8 +61,7 @@ $mainFont: 'Nunito', sans-serif;
 #textArea{
     box-sizing: border-box;
     padding: 50px;
-    width: 100vw;
-    height: 90vh;
+    margin: 0;
     background: none;
     border: none;
     font-size: 16pt;
