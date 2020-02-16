@@ -12,8 +12,8 @@ let currentCursor = cursorMode.TEXT;
 let drawBtnToggle = false;
 let eraseBtnToggle = false;
 
-const DRAW_COLOR = '#f06';
-const DRAW_WIDTH = 4;
+let DRAW_COLOR = '#f06';
+let DRAW_WIDTH = 4;
 const X_OFFSET = 0;
 const Y_OFFSET = -50;
 
@@ -37,10 +37,13 @@ $('#drawBtn').click(function () {
     if (currentCursor === cursorMode.DRAW) {
         currentCursor = cursorMode.TEXT;
         $("#drawingMode").hide();
+        $("#textMode").show();
         $drawing.removeClass("front");
     }
     // switches from any mode to draw when button is pressed
     else {
+        $("#drawingMode").show();
+        $("#textMode").hide();
         $drawing.addClass("front");
         currentCursor = cursorMode.DRAW;
     }
@@ -78,9 +81,15 @@ $('#eraseBtn').click(function () {
     // switches the from erasing mode to text mode when button is pressed
     if (currentCursor === cursorMode.ERASE) {
         currentCursor = cursorMode.TEXT;
+        $("#drawingMode").hide();
+        $("#textMode").show();
+        $drawing.removeClass("front");
     }
     // switches from any mode to erase when button is pressed
     else {
+        $("#drawingMode").show();
+        $("#textMode").hide();
+        $drawing.addClass("front");
         console.log("I'M GOING IN HERE");
         currentCursor = cursorMode.ERASE;
     }
