@@ -33,6 +33,12 @@ $mainFont: 'Nunito', sans-serif;
     height: 100%;
     position: absolute;
     top: 10vh;
+    z-index: -1;
+
+    .path {
+        position: relative;
+        z-index: 1;
+    }
 }
 
 .textArea{
