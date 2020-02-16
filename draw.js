@@ -34,7 +34,7 @@ $('#drawBtn').click(function () {
     // switches the from drawing mode to text mode when button is pressed
     if (currentCursor === cursorMode.DRAW) {
         currentCursor = cursorMode.TEXT;
-        document.getElementById("drawing_mode").hidden
+        $('#drawing_mode').hide();
     }
     // switches from any mode to draw when button is pressed
     else {
