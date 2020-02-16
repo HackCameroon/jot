@@ -98,3 +98,30 @@ $textArea.on('input', ()=>{
 // function getLatexParts(s){
 //     s.includes("=")
 // }
+
+
+
+document.addEventListener('keydown', (event) => {
+  const keyName = event.key;
+
+  if (event.ctrlKey) {
+    // event.key is not 'Control' (different key is pressed),
+    // event.ctrlKey true if Ctrl key is pressed at the same time.
+    console.log(`Combination of ctrlKey + ${keyName}`);
+  } else if (event.altKey){
+    console.log(`Combination of altKey + ${keyName}`);
+  } else {
+    console.log(`Key pressed ${keyName}`);
+  }
+});
+
+document.addEventListener('keyup', (event) => {
+  const keyName = event.key;
+
+  // As the user releases the Ctrl key,
+  // so event.ctrlKey is false.
+  if (keyName === 'Control') {
+    console.log('Control key was released');
+  }
+});
+
