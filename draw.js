@@ -2,7 +2,7 @@ let draw = SVG('drawing');
 let p;
 let mouseDown = false;
 
-let cursorMode = {
+const cursorMode = {
     TEXT: 1,
     DRAW: 2,
     ERASE: 3,
@@ -32,7 +32,7 @@ function drawHandler(e) {
 
 // acts according to the current state of the mouse
 $('#drawBtn').click(function () {
-
+    console.log('click');
     // switches the from drawing mode to text mode when button is pressed
     if (currentCursor === cursorMode.DRAW) {
         currentCursor = cursorMode.TEXT;

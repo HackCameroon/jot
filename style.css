@@ -26,7 +26,6 @@
   height: 100%;
   position: absolute;
   top: 10vh;
-  z-index: -1;
 }
 
 #drawing .path {
@@ -48,6 +47,8 @@
   border: none;
   font-size: 16pt;
   background: #FFEFD9;
+  position: relative;
+  z-index: 1;
 }
 
 .textArea .bold {
