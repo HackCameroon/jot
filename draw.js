@@ -18,6 +18,10 @@ const X_OFFSET = 0;
 const Y_OFFSET = -50;
 
 
+$('#size').change(function(){
+    drawWidth = $('#size').val();   
+});
+
 $drawing = $("#drawing");   // create jquery object for drawings
 
 
