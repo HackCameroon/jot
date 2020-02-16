@@ -36,8 +36,17 @@ $mainFont: 'Nunito', sans-serif;
     height: 100%;
     position: absolute;
     top: 10vh;
+
+    .path {
+        position: relative;
+        z-index: 1;
+    }
 }
 
+.front{
+    position: relative;
+    z-index: 3;
+}
 
 .textArea{
     box-sizing: border-box;
@@ -48,7 +57,7 @@ $mainFont: 'Nunito', sans-serif;
     border: none;
     font-size: 16pt;
     position: relative;
-    //z-index: 1;
+    z-index: 1;
 
     .bold{
         font-weight: bold;
