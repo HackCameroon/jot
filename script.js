@@ -7,7 +7,11 @@ let divApplier = rangy.createClassApplier('div');
 
 spanHighlighter.addClassApplier(spanApplier);
 divHighlighter.addClassApplier(divHighlighter);
+
+let MQ = MathQuill.getInterface(2);
+let texCount = 0;
 let graphCount = 0;
+let codeCount = 0;
 function isGraphable(s){
     let calculator = Desmos.GraphingCalculator();
     calculator.setExpression({id:'g1', latex: s});
@@ -69,6 +73,15 @@ let doc = {
     },
     addUrl: (url)=>{
         spanHighlighter.highlight('bold');
+    },
+    makeTex: (text)=>{
+        let texDiv = $('<span id="tex'+texCount+'">'+text+'</span>');
+        MQ.MathField('tex'+texCount);
+        texCount++;
+    },
+    addCode: (cod,lan)=>{ //<pre><code class="language-css"></code>   <-- should look like this
+        let codeDiv = $('<pre><code id="code'+codeCount+' class="'+lan+'">'+cod+'</span>');
+        codeCount++;
     }
 }
 
